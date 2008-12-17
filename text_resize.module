@@ -1,0 +1,47 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Creates a small block with jQuery links that resize text within the BODY tag.
+ */
+
+/**
+ * Implementation of hook_block().
+ */
+function text_resize_block($op = 'list', $delta = 0, $edit = array()) {
+  global $user;
+  switch ($op) {
+    case 'list': // Makes it show up on /admin/build/block page.
+      $blocks[0]['info'] = t('Text Resize');
+      return $blocks;
+    case 'view':
+      // Show the block.
+      $block['subject'] = t('Text Resize');
+      $block['content'] = theme('text_resize_block');
+      return $block;
+  }
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function text_resize_init() {
+  drupal_add_css(drupal_get_path('module', 'text_resize') .'/text_resize.css');
+  drupal_add_js(drupal_get_path('module', 'text_resize') .'/jquery.cookie.js');
+  drupal_add_js(drupal_get_path('module', 'text_resize') .'/text_resize.js');
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function text_resize_theme() {
+  return array(
+    'text_resize_block' => array(),
+  );
+}
+// Create a theme function that can be overridden by other theme developers.
+function theme_text_resize_block() {
+  $output = t('<a href="javascript:;" class="changer" id="fontSmall"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="fontBig"><sup>+</sup>A</a>');
+  return $output;
+}

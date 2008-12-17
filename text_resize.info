@@ -1,0 +1,6 @@
+; $Id $
+name = Text Resize
+description = Creates a block with links that use jQuery to resize text within the specified DIV.
+core = "6.x"
+version = "6.x-1.0"
+developer = Mark Jarrell

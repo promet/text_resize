@@ -7,6 +7,97 @@
  */
 
 /**
+ * Implementation of hook_menu().
+ */
+function text_resize_menu() {
+  $items = array();
+  $items['admin/settings/text_resize'] = array(
+    'title' => 'Text Resize',
+    'description' => 'Settings for your Text Resize block.',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_text_resize_admin_settings'),
+    'type' => MENU_NORMAL_ITEM
+  );
+  return $items;
+}
+
+/**
+ * Builder function for admin settings form.
+ */
+function _text_resize_admin_settings() {
+  $form = array();
+
+  $form['text_resize_scope'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Text Resize Scope',
+    '#default_value' => _text_resize_scope(),
+    '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS ID attribute, or an HTML tag.<br />For example, if you want all text within &lt;div id="my-container"&gt; to be resized, enter the ID "my-container".<br />If, on the other hand, you would like all text within the BODY tag to be resized, enter "body".'),
+    '#required' => TRUE
+  );
+  $form['text_resize_minimum'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Minimum Text Size',
+    '#maxlength' => 2,
+    '#default_value' => _text_resize_minimum(),
+    '#description' => 'What is the smallest font size (in pixels) that your text can be resized to by users?',
+    '#required' => TRUE
+  );
+  $form['text_resize_maximum'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Maximum Text Size',
+    '#maxlength' => 2,
+    '#default_value' => _text_resize_maximum(),
+    '#description' => 'What is the largest font size (in pixels) that your text can be resized to by users?',
+    '#required' => TRUE
+  );
+
+  $form = system_settings_form($form);
+  // Rebuild the menu after updating the settings.
+  $form['#submit'][] = 'menu_rebuild';
+  return $form;
+}
+
+function _text_resize_scope($value = NULL) {
+  if (is_null($value)) {
+    return _get_text_resize_scope();
+  }
+  variable_set('text_resize_scope', $value);
+}
+
+// Get the scope specified by the admin
+function _get_text_resize_scope() {
+  $text_resize_scope = variable_get('text_resize_scope', 'content-inner');
+  return $text_resize_scope;
+}
+
+function _text_resize_minimum($value = NULL) {
+  if (is_null($value)) {
+    return _get_text_resize_minimum();
+  }
+  variable_set('text_resize_minimum', $value);
+}
+
+// Get the minimum size specified by the admin
+function _get_text_resize_minimum() {
+  $text_resize_minimum = variable_get('text_resize_minimum', '12');
+  return $text_resize_minimum;
+}
+
+function _text_resize_maximum($value = NULL) {
+  if (is_null($value)) {
+    return _get_text_resize_maximum();
+  }
+  variable_set('text_resize_maximum', $value);
+}
+
+// Get the maximum size specified by the admin
+function _get_text_resize_maximum() {
+  $text_resize_maximum = variable_get('text_resize_maximum', '25');
+  return $text_resize_maximum;
+}
+
+/**
  * Implementation of hook_block().
  */
 function text_resize_block($op = 'list', $delta = 0, $edit = array()) {
@@ -28,8 +119,11 @@ function text_resize_block($op = 'list', $delta = 0, $edit = array()) {
  */
 function text_resize_init() {
   drupal_add_css(drupal_get_path('module', 'text_resize') .'/text_resize.css');
-  drupal_add_js(drupal_get_path('module', 'text_resize') .'/jquery.cookie.js');
-  drupal_add_js(drupal_get_path('module', 'text_resize') .'/text_resize.js');
+  drupal_add_js(drupal_get_path('module', 'text_resize') .'/jquery.cookie.js', 'file');
+  drupal_add_js('var text_resize_scope = ' . drupal_to_js(_get_text_resize_scope()) . ';', 'inline');
+  drupal_add_js('var text_resize_minimum = ' . drupal_to_js(_get_text_resize_minimum()) . ';', 'inline');
+  drupal_add_js('var text_resize_maximum = ' . drupal_to_js(_get_text_resize_maximum()) . ';', 'inline');
+  drupal_add_js(drupal_get_path('module', 'text_resize') .'/text_resize.js', 'file');
 }
 
 /**
@@ -42,6 +136,6 @@ function text_resize_theme() {
 }
 // Create a theme function that can be overridden by other theme developers.
 function theme_text_resize_block() {
-  $output = t('<a href="javascript:;" class="changer" id="fontSmall"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="fontBig"><sup>+</sup>A</a>');
+  $output = t('<a href="javascript:;" class="changer" id="fontSmall"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="fontBig"><sup>+</sup>A</a><div id="text_resize_clear"></div>');
   return $output;
 }

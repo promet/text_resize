@@ -18,11 +18,7 @@ Customization
 -------
 
 Text Resize should work fine with either Garland or Zen-based themes.  If it's not working for your
-installation, you may need to change the div that's being resized.
-
-Check inside text_resize.js.  The line that says "var elementToResize" needs
-to be set equal to your DIV that you're wanting to resize.  You can also make the value
-equal to $('BODY'); if you want to resize all body text.
+installation, you may need to change the div that's being resized. Please use the administration form for Text Resize to customize.
 
 Support
 -------

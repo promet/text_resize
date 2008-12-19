@@ -3,15 +3,19 @@
 if (Drupal.jsEnabled) {
   $(document).ready(function(){
     // Config variables
-    var largestSizeAllowed = 25;
-    var smallestSizeAllowed = 12;
+    var largestSizeAllowed = text_resize_maximum; // Based on admin form variable
+    var smallestSizeAllowed = text_resize_minimum; // Based on admin form variable
     // Which div or page element are we resizing?
-    if ( $('DIV.left-corner').length > 0 ) {
+    if ($('DIV.left-corner').length > 0) {
       var elementToResize = $('DIV.left-corner'); // Main body div for Garland
-    } else {
+    } else if ($('#content-inner').length > 0) {
       var elementToResize = $('#content-inner'); // Main body div for Zen-based themes
+    } else if ($('#'+text_resize_scope).length > 0) {
+      var elementToResize = $('#'+text_resize_scope); // ID specified by admin
+    } else {
+      var elementToResize = $(text_resize_scope); // It's just a tag specified by admin
     }
-    
+
     // Set the initial font size if necessary
     if ($.cookie('text_resize') != null) {
       elementToResize.css('font-size', parseFloat($.cookie('text_resize')));

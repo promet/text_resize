@@ -20,3 +20,6 @@
   outline: none;
   text-indent: -9000px;
 }
+#text_resize_clear {
+  clear: both;
+}

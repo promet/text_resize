@@ -30,14 +30,14 @@ if (Drupal.jsEnabled) {
       // parse the number value out of the font size value, set as a var called 'num'
       var currentFontSizeNum = parseFloat(currentFontSize, 10);
       // javascript lets us choose which link was clicked, by ID
-      if (this.id == 'fontBig'){
+      if (this.id == 'text_resize_fontBig'){
         var newFontSize = currentFontSizeNum * 1.2;
         // Allow resizing as long as font size doesn't go above largestSizeAllowed.
         if (newFontSize <= largestSizeAllowed) {
           $.cookie('text_resize', newFontSize, { path: '/' });
           var allowChange = true;
         }
-      } else if (this.id == 'fontSmall'){
+      } else if (this.id == 'text_resize_fontSmall'){
         var newFontSize = currentFontSizeNum * 0.8;
         if (newFontSize >= smallestSizeAllowed) {
           // Allow resizing as long as font size doesn't go below smallestSizeAllowed.

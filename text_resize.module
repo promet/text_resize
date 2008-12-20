@@ -136,6 +136,6 @@ function text_resize_theme() {
 }
 // Create a theme function that can be overridden by other theme developers.
 function theme_text_resize_block() {
-  $output = t('<a href="javascript:;" class="changer" id="fontSmall"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="fontBig"><sup>+</sup>A</a><div id="text_resize_clear"></div>');
+  $output = t('<a href="javascript:;" class="changer" id="text_resize_fontSmall"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="text_resize_fontBig"><sup>+</sup>A</a><div id="text_resize_clear"></div>');
   return $output;
 }

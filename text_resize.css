@@ -1,6 +1,6 @@
 /* $Id $ */
 
-#block-text_resize-0 a#fontBig {
+a#text_resize_fontBig {
   background:url(aBig.gif) no-repeat 0 0;
   display:block;
   float: right;
@@ -10,7 +10,7 @@
   outline: none;
   text-indent: -9000px;
 }
-#block-text_resize-0 a#fontSmall {
+a#text_resize_fontSmall {
   background:url(aSmall.gif) no-repeat 0 0;
   display:block;
   float: right;

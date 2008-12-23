@@ -51,6 +51,21 @@ function _text_resize_admin_settings() {
     '#description' => 'What is the largest font size (in pixels) that your text can be resized to by users?',
     '#required' => TRUE
   );
+  $form['text_resize_line_height_allow'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Allow Line-Height Adjustment',
+    '#default_value' => _text_resize_line_height_allow(),
+    '#description' => 'Do you want to allow Text Resize to change the spacing between the lines of text?',
+    '#required' => TRUE
+  );
+/*  $form['text_resize_line_height_base'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Base Line Height',
+    '#maxlength' => 2,
+    '#default_value' => _text_resize_maximum(),
+    '#description' => 'What is the largest font size (in pixels) that your text can be resized to by users?',
+    '#required' => TRUE
+  );*/
 
   $form = system_settings_form($form);
   // Rebuild the menu after updating the settings.
@@ -97,6 +112,19 @@ function _get_text_resize_maximum() {
   return $text_resize_maximum;
 }
 
+function _text_resize_line_height_allow($value = NULL) {
+  if (is_null($value)) {
+    return _get_text_resize_line_height_allow();
+  }
+  variable_set('text_resize_line_height_allow', $value);
+}
+
+// Get the line height preference specified by the admin
+function _get_text_resize_line_height_allow() {
+  $text_resize_line_height_allow = variable_get('text_resize_line_height_allow', FALSE);
+  return $text_resize_line_height_allow;
+}
+
 /**
  * Implementation of hook_block().
  */
@@ -123,6 +151,7 @@ function text_resize_init() {
   drupal_add_js('var text_resize_scope = ' . drupal_to_js(_get_text_resize_scope()) . ';', 'inline');
   drupal_add_js('var text_resize_minimum = ' . drupal_to_js(_get_text_resize_minimum()) . ';', 'inline');
   drupal_add_js('var text_resize_maximum = ' . drupal_to_js(_get_text_resize_maximum()) . ';', 'inline');
+  drupal_add_js('var text_resize_line_height_allow = ' . drupal_to_js(_get_text_resize_line_height_allow()) . ';', 'inline');
   drupal_add_js(drupal_get_path('module', 'text_resize') .'/text_resize.js', 'file');
 }
 

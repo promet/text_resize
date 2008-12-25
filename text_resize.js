@@ -43,7 +43,7 @@ if (Drupal.jsEnabled) {
 			var current_line_height = parseFloat(element_to_resize.css('line-height'), 10);
 			//alert('current_line_height = '+current_line_height);
       // javascript lets us choose which link was clicked, by ID
-      if (this.id == 'text_resize_fontBig'){
+      if (this.id == 'text_resize_increase'){
         var new_font_size = currentFontSize * 1.2;
         if (line_height_allow) { var new_line_height = current_line_height * 1.2; }
         // Allow resizing as long as font size doesn't go above largest_size_allowed.
@@ -52,7 +52,7 @@ if (Drupal.jsEnabled) {
           if (line_height_allow) { $.cookie('text_resize_line_height', new_line_height, { path: '/' }); }
           var allow_change = true;
         }
-      } else if (this.id == 'text_resize_fontSmall'){
+      } else if (this.id == 'text_resize_decrease'){
         var new_font_size = currentFontSize * 0.8;
         if (line_height_allow) { var new_line_height = current_line_height * 0.8; }
         if (new_font_size >= smallest_size_allowed) {

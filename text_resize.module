@@ -32,7 +32,7 @@ function _text_resize_admin_settings() {
     '#type' => 'textfield',
     '#title' => 'Text Resize Scope',
     '#default_value' => _text_resize_scope(),
-    '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS ID attribute, or an HTML tag.<br />For example, if you want all text within &lt;div id="my-container"&gt; to be resized, enter the ID "my-container".<br />If, on the other hand, you would like all text within the BODY tag to be resized, enter "body".'),
+    '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS class attribute, the CSS id attribute, or an HTML tag.<br />For example, if you want all text within &lt;div id="my-container"&gt; to be resized, enter the ID <strong>my-container</strong>.<br />If, on the other hand, you would like all text within the BODY tag to be resized, enter <strong>body</strong>.'),
     '#required' => TRUE
   );
   $form['text_resize_minimum'] = array(
@@ -58,15 +58,6 @@ function _text_resize_admin_settings() {
     '#description' => 'Do you want to allow Text Resize to change the spacing between the lines of text?',
     '#required' => TRUE
   );
-/*  $form['text_resize_line_height_base'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Base Line Height',
-    '#maxlength' => 2,
-    '#default_value' => _text_resize_maximum(),
-    '#description' => 'What is the largest font size (in pixels) that your text can be resized to by users?',
-    '#required' => TRUE
-  );*/
-
   $form = system_settings_form($form);
   // Rebuild the menu after updating the settings.
   $form['#submit'][] = 'menu_rebuild';
@@ -148,10 +139,10 @@ function text_resize_block($op = 'list', $delta = 0, $edit = array()) {
 function text_resize_init() {
   drupal_add_css(drupal_get_path('module', 'text_resize') .'/text_resize.css');
   drupal_add_js(drupal_get_path('module', 'text_resize') .'/jquery.cookie.js', 'file');
-  drupal_add_js('var text_resize_scope = ' . drupal_to_js(_get_text_resize_scope()) . ';', 'inline');
-  drupal_add_js('var text_resize_minimum = ' . drupal_to_js(_get_text_resize_minimum()) . ';', 'inline');
-  drupal_add_js('var text_resize_maximum = ' . drupal_to_js(_get_text_resize_maximum()) . ';', 'inline');
-  drupal_add_js('var text_resize_line_height_allow = ' . drupal_to_js(_get_text_resize_line_height_allow()) . ';', 'inline');
+  drupal_add_js("var text_resize_scope = ". drupal_to_js(_get_text_resize_scope()) .";
+    var text_resize_minimum = ". drupal_to_js(_get_text_resize_minimum()) .";
+    var text_resize_maximum = ". drupal_to_js(_get_text_resize_maximum()) .";
+    var text_resize_line_height_allow = ". drupal_to_js(_get_text_resize_line_height_allow()) .";", 'inline');
   drupal_add_js(drupal_get_path('module', 'text_resize') .'/text_resize.js', 'file');
 }
 
@@ -165,6 +156,6 @@ function text_resize_theme() {
 }
 // Create a theme function that can be overridden by other theme developers.
 function theme_text_resize_block() {
-  $output = t('<a href="javascript:;" class="changer" id="text_resize_fontSmall"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="text_resize_fontBig"><sup>+</sup>A</a><div id="text_resize_clear"></div>');
+  $output = t('<a href="javascript:;" class="changer" id="text_resize_decrease"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="text_resize_increase"><sup>+</sup>A</a><div id="text_resize_clear"></div>');
   return $output;
 }

@@ -1,8 +1,8 @@
 // $Id $
 
-The Text Resize  module creates a block with links that use jQuery to resize text within the specified DIV.
+The Text Resize module creates a block with links that use jQuery to resize text within the specified DIV.
 
-Text Resize was designed by Mark W. Jarrell at Jones Knowledge Group (http://www.jones.com).
+Text Resize was designed by Mark W. Jarrell (attheshow) at Jones Knowledge Group (http://www.jones.com).
 
 
 Install

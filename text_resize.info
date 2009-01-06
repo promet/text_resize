@@ -3,7 +3,6 @@ name = Text Resize
 description = Creates a block with links that use jQuery to resize text within the specified DIV.
 core = "6.x"
 version = VERSION
-developer = Mark Jarrell
 ; Information added by drupal.org packaging script on 2008-12-25
 version = "6.x-1.1"
 core = "6.x"

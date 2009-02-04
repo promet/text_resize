@@ -72,7 +72,7 @@ if (Drupal.jsEnabled) {
 				if (line_height_allow) { element_to_resize.css('line-height', new_line_height + 'px'); }
         return false;
       } else if (reset_size == true) {
-        element_to_resize.css('font-size', smallest_size_allowed);
+        element_to_resize.css('font-size', smallest_size_allowed + 'px');
         return false;
       }
     });

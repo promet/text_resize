@@ -6,6 +6,8 @@ if (Drupal.jsEnabled) {
     var largest_size_allowed = text_resize_maximum; // Based on admin form variable
     var smallest_size_allowed = text_resize_minimum; // Based on admin form variable
 		var line_height_allow = text_resize_line_height_allow; // Based on admin form variable
+		var line_height_min = text_resize_line_height_min; // Based on admin form variable
+		var line_height_max = text_resize_line_height_max; // Based on admin form variable
     // Which div or page element are we resizing?
     if ($('DIV.left-corner').length > 0) {
       var element_to_resize = $('DIV.left-corner'); // Main body div for Garland
@@ -51,7 +53,11 @@ if (Drupal.jsEnabled) {
           $.cookie('text_resize', new_font_size, { path: '/' });
           if (line_height_allow) { $.cookie('text_resize_line_height', new_line_height, { path: '/' }); }
           var allow_change = true;
-        }
+        } else {
+					$.cookie('text_resize', largest_size_allowed, { path: '/' });
+          if (line_height_allow) { $.cookie('text_resize_line_height', line_height_max, { path: '/' }); }
+          var reset_size_max = true;
+				}
       } else if (this.id == 'text_resize_decrease'){
         var new_font_size = currentFontSize * 0.8;
         if (line_height_allow) { var new_line_height = current_line_height * 0.8; }
@@ -63,7 +69,8 @@ if (Drupal.jsEnabled) {
         } else {
           // If it goes below smallest_size_allowed, just leave it at smallest_size_allowed.
           $.cookie('text_resize', smallest_size_allowed, { path: '/' });
-          var reset_size = true;
+					if (line_height_allow) { $.cookie('text_resize_line_height', line_height_min, { path: '/' }); }
+          var reset_size_min = true;
         }
       }
       // jQuery lets us set the font Size value of the main text div
@@ -71,8 +78,13 @@ if (Drupal.jsEnabled) {
         element_to_resize.css('font-size', new_font_size + 'px'); // Add 'px' onto the end, otherwise ems are used as units by default
 				if (line_height_allow) { element_to_resize.css('line-height', new_line_height + 'px'); }
         return false;
-      } else if (reset_size == true) {
+      } else if (reset_size_min == true) {
         element_to_resize.css('font-size', smallest_size_allowed + 'px');
+				if (line_height_allow) { element_to_resize.css('line-height', line_height_min + 'px'); }
+        return false;
+      } else if (reset_size_max == true) {
+        element_to_resize.css('font-size', largest_size_allowed + 'px');
+				if (line_height_allow) { element_to_resize.css('line-height', line_height_max + 'px'); }
         return false;
       }
     });

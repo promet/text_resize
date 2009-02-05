@@ -33,7 +33,7 @@ function _text_resize_admin_settings() {
     '#title' => 'Text Resize Scope',
     '#default_value' => _text_resize_scope(),
     '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS class attribute, the CSS id attribute, or an HTML tag.<br />For example, if you want all text within &lt;div id="my-container"&gt; to be resized, enter the ID <strong>my-container</strong>.<br />If, on the other hand, you would like all text within the BODY tag to be resized, enter <strong>body</strong>.'),
-    '#required' => TRUE
+    '#required' => TRUE,
   );
   $form['text_resize_minimum'] = array(
     '#type' => 'textfield',
@@ -41,7 +41,7 @@ function _text_resize_admin_settings() {
     '#maxlength' => 2,
     '#default_value' => _text_resize_minimum(),
     '#description' => 'What is the smallest font size (in pixels) that your text can be resized to by users?',
-    '#required' => TRUE
+    '#required' => TRUE,
   );
   $form['text_resize_maximum'] = array(
     '#type' => 'textfield',
@@ -49,7 +49,7 @@ function _text_resize_admin_settings() {
     '#maxlength' => 2,
     '#default_value' => _text_resize_maximum(),
     '#description' => 'What is the largest font size (in pixels) that your text can be resized to by users?',
-    '#required' => TRUE
+    '#required' => TRUE,
   );
   $form['text_resize_line_height_allow'] = array(
     '#type' => 'checkbox',
@@ -57,6 +57,26 @@ function _text_resize_admin_settings() {
     '#default_value' => _text_resize_line_height_allow(),
     '#description' => 'Do you want to allow Text Resize to change the spacing between the lines of text?',
     '#required' => TRUE
+  );
+  $form['text_resize_line_height_allow'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Allow Line-Height Adjustment',
+    '#default_value' => _text_resize_line_height_allow(),
+    '#description' => 'Do you want to allow Text Resize to change the spacing between the lines of text?',
+  );
+  $form['text_resize_line_height_min'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Minimum Line-Height',
+    '#maxlength' => 2,
+    '#default_value' => _text_resize_line_height_min(),
+    '#description' => 'What is the smallest line-height (in pixels) that your text can be resized to by users?',
+  );
+  $form['text_resize_line_height_max'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Maximum Line-Height',
+    '#maxlength' => 2,
+    '#default_value' => _text_resize_line_height_max(),
+    '#description' => 'What is the largest line-height (in pixels) that your text can be resized to by users?',
   );
   $form = system_settings_form($form);
   // Rebuild the menu after updating the settings.
@@ -116,6 +136,32 @@ function _get_text_resize_line_height_allow() {
   return $text_resize_line_height_allow;
 }
 
+function _text_resize_line_height_min($value = NULL) {
+  if (is_null($value)) {
+    return _get_text_resize_line_height_min();
+  }
+  variable_set('text_resize_line_height_min', $value);
+}
+
+// Get the minimum line height preference specified by the admin
+function _get_text_resize_line_height_min() {
+  $text_resize_line_height_min = variable_get('text_resize_line_height_min', 16);
+  return $text_resize_line_height_min;
+}
+
+function _text_resize_line_height_max($value = NULL) {
+  if (is_null($value)) {
+    return _get_text_resize_line_height_max();
+  }
+  variable_set('text_resize_line_height_max', $value);
+}
+
+// Get the maximum line height preference specified by the admin
+function _get_text_resize_line_height_max() {
+  $text_resize_line_height_max = variable_get('text_resize_line_height_max', 36);
+  return $text_resize_line_height_max;
+}
+
 /**
  * Implementation of hook_block().
  */
@@ -142,7 +188,9 @@ function text_resize_init() {
   drupal_add_js("var text_resize_scope = ". drupal_to_js(_get_text_resize_scope()) .";
     var text_resize_minimum = ". drupal_to_js(_get_text_resize_minimum()) .";
     var text_resize_maximum = ". drupal_to_js(_get_text_resize_maximum()) .";
-    var text_resize_line_height_allow = ". drupal_to_js(_get_text_resize_line_height_allow()) .";", 'inline');
+    var text_resize_line_height_allow = ". drupal_to_js(_get_text_resize_line_height_allow()) .";
+		var text_resize_line_height_min = ". drupal_to_js(_get_text_resize_line_height_min()) .";
+    var text_resize_line_height_max = ". drupal_to_js(_get_text_resize_line_height_max()) .";", 'inline');
   drupal_add_js(drupal_get_path('module', 'text_resize') .'/text_resize.js', 'file');
 }
 
@@ -158,4 +206,17 @@ function text_resize_theme() {
 function theme_text_resize_block() {
   $output = t('<a href="javascript:;" class="changer" id="text_resize_decrease"><sup>-</sup>A</a> <a href="javascript:;" class="changer" id="text_resize_increase"><sup>+</sup>A</a><div id="text_resize_clear"></div>');
   return $output;
+}
+
+/**
+ * Implementation of hook_help().
+ */
+function text_resize_help($section = 'admin/help#text_resize') {
+  switch ($section) {
+    case 'admin/help#text_resize':
+      $output = '<p>'. t('The Text Resize module creates a block on the page that can be used by your site visitors to quickly and easily adjust the sizing of text as it displays for them.  In order to enable the functionality of the Text Resize module, you will need to make sure that you have enabled the Text Resize block on the <a href="admin/build/block">blocks page</a>. You will also probably want to configure the behavior of the module at the administration pages listed below:') .'</p>';
+      return $output;
+    case 'admin/settings/modules#description':
+      return t('Creates a block that allows your users to resize text on the page.');
+  }
 }

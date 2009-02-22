@@ -9,19 +9,23 @@ if (Drupal.jsEnabled) {
 		var line_height_min = text_resize_line_height_min; // Based on admin form variable
 		var line_height_max = text_resize_line_height_max; // Based on admin form variable
     // Which div or page element are we resizing?
-    if ($('DIV.left-corner').length > 0) {
-      var element_to_resize = $('DIV.left-corner'); // Main body div for Garland
-    } else if ($('#content-inner').length > 0) {
-      var element_to_resize = $('#content-inner'); // Main body div for Zen-based themes
-    } else if ($('#squeeze > #content').length > 0) {
-      var element_to_resize = $('#squeeze > #content'); // Main body div for Zen Classic
-    } else if ($('#'+text_resize_scope).length > 0) {
-      var element_to_resize = $('#'+text_resize_scope); // ID specified by admin
-    } else if ($('.'+text_resize_scope).length > 0) {
-      var element_to_resize = $('.'+text_resize_scope); // CLASS specified by admin
-    } else {
-      var element_to_resize = $(text_resize_scope); // It's just a tag specified by admin
-    }
+    if (text_resize_scope) { // Admin-specified scope takes precedence.
+      if ($('#'+text_resize_scope).length > 0) {
+        var element_to_resize = $('#'+text_resize_scope); // ID specified by admin
+      } else if ($('.'+text_resize_scope).length > 0) {
+        var element_to_resize = $('.'+text_resize_scope); // CLASS specified by admin
+      } else {
+        var element_to_resize = $(text_resize_scope); // It's just a tag specified by admin
+      }
+		} else { // Look for some default scopes that might exist.
+      if ($('DIV.left-corner').length > 0) {
+        var element_to_resize = $('DIV.left-corner'); // Main body div for Garland
+      } else if ($('#content-inner').length > 0) {
+        var element_to_resize = $('#content-inner'); // Main body div for Zen-based themes
+      } else if ($('#squeeze > #content').length > 0) {
+        var element_to_resize = $('#squeeze > #content'); // Main body div for Zen Classic
+      }
+		}
     // Set the initial font size if necessary
     if ($.cookie('text_resize') != null) {
       element_to_resize.css('font-size', parseFloat($.cookie('text_resize')) + 'px');

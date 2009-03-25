@@ -214,7 +214,16 @@ function theme_text_resize_block() {
 function text_resize_help($section = 'admin/help#text_resize') {
   switch ($section) {
     case 'admin/help#text_resize':
-      $output = '<p>'. t('The Text Resize module creates a block on the page that can be used by your site visitors to quickly and easily adjust the sizing of text as it displays for them.  In order to enable the functionality of the Text Resize module, you will need to make sure that you have enabled the Text Resize block on the <a href="admin/build/block">blocks page</a>. You will also probably want to configure the behavior of the module at the administration pages listed below:') .'</p>';
+      $output = '<p>'. t('The Text Resize module creates a block on the page that can be used by your site visitors to quickly and easily adjust the sizing of text as it displays for them.  In order to enable the functionality of the Text Resize module, you will need to make sure that you have enabled the Text Resize block on the <a href="admin/build/block">blocks page</a>. You will also probably want to configure the behavior of the module at the administration pages listed at the bottom of this page.') .'</p>';
+      $output .= '<h2>'. t('Changing How Text Resize Looks') .'</h2>';
+      $output .= '<h3>'. t('Method 1: Just CSS') .'</h3>';
+      $output .= '<p>'. t('Text Resize creates two stylized hyperlinks on the page. You can add a couple of new styles to your own theme\'s stylesheet that will override the default CSS styles produced by Text Resize. The two ids you\'ll want to add and modify in your stylesheet are:') .'</p>';
+      $output .= '<ul><li>'. t('#text_resize_increase') .'</li>';
+      $output .= '<li>'. t('#text_resize_decrease') .'</li></ul>';
+      $output .= '<h3>'. t('Method 2: A Theme Function') .'</h3>';
+      $output .= '<p>'. t('If you need to change the HTML that is produced by Text Resize in some way, you can create a small function in your theme\'s template.php file. An example is below:') .'</p>';
+      $output .= '<p><code>function YOUR_THEME_NAME_text_resize_block() {<br />&nbsp;&nbsp;$output = t(\'&lt;a href="javascript:;" class="changer" id="text_resize_decrease"&gt;&lt;sup&gt;-&lt;/sup&gt;A&lt;/a&gt; &lt;a href="javascript:;" class="changer" id="text_resize_increase"&gt;&lt;sup&gt;+&lt;/sup&gt;A&lt;/a&gt; &lt;a href="/contact"&gt;Contact&lt;/a&gt; | &lt;a href="/pages/site-map"&gt;Site Map&lt;/a&gt;&lt;div id="text_resize_clear"&gt;&lt;/div&gt;\');<br />&nbsp;&nbsp;return $output;<br />}</code></p>';
+      $output .= '<p>'. t('In the example above, the HTML output code is just modified so that two new hyperlinks are added into the original block code.') .'</p>';
       return $output;
     case 'admin/settings/modules#description':
       return t('Creates a block that allows your users to resize text on the page.');

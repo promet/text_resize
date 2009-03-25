@@ -18,7 +18,9 @@ Customization
 -------
 
 Text Resize should work fine with either Garland or Zen-based themes.  If it's not working for your
-installation, you may need to change the div that's being resized. Please use the administration form for Text Resize to customize.
+installation, you may need to change the div that's being resized. Please use the administration form for
+Text Resize to customize. More customization tips can be found in the help for the module.
+You'll find the help at /admin/help/text_resize.
 
 Support
 -------

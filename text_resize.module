@@ -37,7 +37,7 @@ function _text_resize_admin_settings() {
   );
   $form['text_resize_minimum'] = array(
     '#type' => 'textfield',
-    '#title' => 'Minimum Text Size',
+    '#title' => 'Default/Minimum Text Size',
     '#maxlength' => 2,
     '#default_value' => _text_resize_minimum(),
     '#description' => 'What is the smallest font size (in pixels) that your text can be resized to by users?',
@@ -55,7 +55,7 @@ function _text_resize_admin_settings() {
     '#type' => 'checkbox',
     '#title' => 'Add Reset Button',
     '#default_value' => _text_resize_reset_button(),
-    '#description' => 'Do you want to add an extra button to the block to allow the font size to be reset to normal?',
+    '#description' => 'Do you want to add an extra button to the block to allow the font size to be reset to the default/minimum size set above?',
   );
   $form['text_resize_line_height_allow'] = array(
     '#type' => 'checkbox',

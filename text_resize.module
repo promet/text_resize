@@ -30,52 +30,52 @@ function _text_resize_admin_settings() {
 
   $form['text_resize_scope'] = array(
     '#type' => 'textfield',
-    '#title' => 'Text Resize Scope',
+    '#title' => t('Text Resize Scope'),
     '#default_value' => _text_resize_scope(),
     '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS class attribute, the CSS id attribute, or an HTML tag.<br />For example, if you want all text within &lt;div id="my-container"&gt; to be resized, enter the ID <strong>my-container</strong>.<br />If, on the other hand, you would like all text within the BODY tag to be resized, enter <strong>body</strong>.'),
     '#required' => TRUE,
   );
   $form['text_resize_minimum'] = array(
     '#type' => 'textfield',
-    '#title' => 'Default/Minimum Text Size',
+    '#title' => t('Default/Minimum Text Size'),
     '#maxlength' => 2,
     '#default_value' => _text_resize_minimum(),
-    '#description' => 'What is the smallest font size (in pixels) that your text can be resized to by users?',
+    '#description' => t('What is the smallest font size (in pixels) that your text can be resized to by users?'),
     '#required' => TRUE,
   );
   $form['text_resize_maximum'] = array(
     '#type' => 'textfield',
-    '#title' => 'Maximum Text Size',
+    '#title' => t('Maximum Text Size'),
     '#maxlength' => 2,
     '#default_value' => _text_resize_maximum(),
-    '#description' => 'What is the largest font size (in pixels) that your text can be resized to by users?',
+    '#description' => t('What is the largest font size (in pixels) that your text can be resized to by users?'),
     '#required' => TRUE,
   );
   $form['text_resize_reset_button'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Add Reset Button',
+    '#title' => t('Add Reset Button'),
     '#default_value' => _text_resize_reset_button(),
-    '#description' => 'Do you want to add an extra button to the block to allow the font size to be reset to the default/minimum size set above?',
+    '#description' => t('Do you want to add an extra button to the block to allow the font size to be reset to the default/minimum size set above?'),
   );
   $form['text_resize_line_height_allow'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Allow Line-Height Adjustment',
+    '#title' => t('Allow Line-Height Adjustment'),
     '#default_value' => _text_resize_line_height_allow(),
-    '#description' => 'Do you want to allow Text Resize to change the spacing between the lines of text?',
+    '#description' => t('Do you want to allow Text Resize to change the spacing between the lines of text?'),
   );
   $form['text_resize_line_height_min'] = array(
     '#type' => 'textfield',
-    '#title' => 'Minimum Line-Height',
+    '#title' => t('Minimum Line-Height'),
     '#maxlength' => 2,
     '#default_value' => _text_resize_line_height_min(),
-    '#description' => 'What is the smallest line-height (in pixels) that your text can be resized to by users?',
+    '#description' => t('What is the smallest line-height (in pixels) that your text can be resized to by users?'),
   );
   $form['text_resize_line_height_max'] = array(
     '#type' => 'textfield',
-    '#title' => 'Maximum Line-Height',
+    '#title' => t('Maximum Line-Height'),
     '#maxlength' => 2,
     '#default_value' => _text_resize_line_height_max(),
-    '#description' => 'What is the largest line-height (in pixels) that your text can be resized to by users?',
+    '#description' => t('What is the largest line-height (in pixels) that your text can be resized to by users?'),
   );
   $form = system_settings_form($form);
   // Rebuild the menu after updating the settings.

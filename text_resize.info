@@ -1,6 +1,17 @@
-; $Id $
+; $Id$
 name = Text Resize
 description = Creates a block that allows your users to resize text on the page.
-core = "6.x"
-version = VERSION
+core = "7.x"
+Version = 7.x-1.x-dev
 
+files[] = a_reset.gif
+files[] = aBig.gif
+files[] = aSmall.gif
+files[] = jquery.cookie.js
+files[] = LICENSE.txt
+files[] = README.txt
+files[] = text_resize.css
+files[] = text_resize.info
+files[] = text_resize.install
+files[] = text_resize.js
+files[] = text_resize.module

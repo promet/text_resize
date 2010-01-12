@@ -1,6 +1,6 @@
-// $Id $
+// $Id$
 
-if (Drupal.jsEnabled) {
+(function ($) {
   $(document).ready(function() {
     // Which div or page element are we resizing?
     if (text_resize_scope) { // Admin-specified scope takes precedence.
@@ -103,4 +103,4 @@ if (Drupal.jsEnabled) {
       }
     });
   });
-}
+})(jQuery);

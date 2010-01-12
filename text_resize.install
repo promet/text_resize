@@ -7,7 +7,7 @@
  */
 
 /**
- * Implementation of hook_uninstall().
+ * Implements hook_uninstall().
  */
 function text_resize_uninstall() {
   db_query("DELETE FROM {variable} WHERE name LIKE 'text_resize_%'");

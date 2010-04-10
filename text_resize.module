@@ -11,7 +11,7 @@
  */
 function text_resize_menu() {
   $items = array();
-  $items['admin/settings/text_resize'] = array(
+  $items['admin/config/user-interface/coder/text_resize'] = array(
     'title' => 'Text Resize',
     'description' => 'Settings for your Text Resize block.',
     'access arguments' => array('administer site configuration'),

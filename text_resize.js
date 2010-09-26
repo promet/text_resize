@@ -1,7 +1,7 @@
 // $Id$
 
-(function ($) {
-  $(document).ready(function() {
+Drupal.behaviors.textResize = {
+  attach: function(context) {
     // Which div or page element are we resizing?
     if (text_resize_scope) { // Admin-specified scope takes precedence.
       if ($('#'+text_resize_scope).length > 0) {
@@ -102,5 +102,5 @@
         return false;
       }
     });
-  });
-})(jQuery);
+  }
+};

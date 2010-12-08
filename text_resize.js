@@ -63,8 +63,8 @@ Drupal.behaviors.textResize = function(context) {
 			}
     }
     else if (this.id == 'text_resize_decrease') {
-      var new_font_size = currentFontSize * 0.8;
-      if (text_resize_line_height_allow) { var new_line_height = current_line_height * 0.8; }
+      var new_font_size = currentFontSize / 1.2;
+      if (text_resize_line_height_allow) { var new_line_height = current_line_height / 1.2; }
       if (new_font_size >= text_resize_minimum) {
         // Allow resizing as long as font size doesn't go below text_resize_minimum.
         $.cookie('text_resize', new_font_size, { path: '/' });

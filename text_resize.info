@@ -2,7 +2,7 @@
 name = Text Resize
 description = Creates a block that allows your users to resize text on the page.
 core = "7.x"
-version = "7.x-1.x-dev"
+version = VERSION
 
 files[] = text_resize.install
 files[] = text_resize.module

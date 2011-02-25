@@ -1,4 +1,3 @@
-; $Id$
 name = Text Resize
 description = Creates a block that allows your users to resize text on the page.
 core = "7.x"

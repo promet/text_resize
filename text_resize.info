@@ -3,5 +3,7 @@ description = Creates a block that allows your users to resize text on the page.
 core = "7.x"
 version = VERSION
 
+configure = admin/config/user-interface/text_resize
+
 files[] = text_resize.install
 files[] = text_resize.module

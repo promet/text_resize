@@ -94,8 +94,8 @@
           return false;
         }
         else if (reset_size_original == true) {
-          element_to_resize.css('font-size', null);
-          if (text_resize_line_height_allow) { element_to_resize.css('line-height', null); }
+          element_to_resize.css('font-size', '');
+          if (text_resize_line_height_allow) { element_to_resize.css('line-height', ''); }
           return false;
         }
       });

@@ -148,7 +148,7 @@ function text_resize_block_view() {
  */
 function text_resize_init() {
   drupal_add_css(drupal_get_path('module', 'text_resize') . '/text_resize.css');
-  drupal_add_js(drupal_get_path('module', 'text_resize') . '/jquery.cookie.js', 'file');
+  drupal_add_library('system', 'jquery.cookie');
   drupal_add_js("var text_resize_scope = " . drupal_json_encode(_get_text_resize_scope()) . ";
     var text_resize_minimum = " . drupal_json_encode(_get_text_resize_minimum()) . ";
     var text_resize_maximum = " . drupal_json_encode(_get_text_resize_maximum()) . ";

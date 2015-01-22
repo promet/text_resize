@@ -28,10 +28,10 @@ function _text_resize_admin_settings() {
   $form = array();
 
   $form['text_resize_scope'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Text Resize Scope'),
     '#default_value' => variable_get('text_resize_scope', 'main'),
-    '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS class attribute, the CSS id attribute, or an HTML tag.<br />For example, if you want all text within &lt;div id="my-container"&gt; to be resized, enter the ID <strong>my-container</strong>.<br />If, on the other hand, you would like all text within the BODY tag to be resized, enter <strong>body</strong>.'),
+    '#description' => t('Which portion of the body would you like to be resized by the Text Resize block? You may enter either the CSS class attribute, the CSS id attribute, or an HTML tag.'),
     '#required' => TRUE,
   );
   $form['text_resize_minimum'] = array(
